@@ -19,7 +19,7 @@ export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 
 #Flume
-export FLUME_HOME="/usr/lib/flume/"
+export FLUME_HOME="/usr/lib/flume-ng"
 export FLUME_CONF_DIR="$FLUME_HOME/conf"
 export FLUME_CLASSPATH="$FLUME_CONF_DIR"
 
