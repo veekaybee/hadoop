@@ -1,0 +1,56 @@
+
+
+LOAD DATA INFILE '/home/cloudera/Desktop/table.csv' INTO TABLE random.intfloat fields terminated by ','  lines terminated by '\n';
+
+LOAD DATA INFILE '/home/cloudera/Desktop/table.csv' INTO TABLE random.intfloat fields terminated by ','  lines terminated by '\n';  
+
+CREATE TABLE 
+songs (
+	id int(20),
+	position INT(20), 
+	artist VARCHAR(100), 
+	song VARCHAR(200),
+	year INT(4),
+	PRIMARY KEY (id)
+	);
+
+LOAD DATA INFILE '/home/cloudera/Desktop/allsongs.csv' INTO TABLE billboard.songs fields terminated by ','  lines terminated by '\n';  
+
+
+#Import table from Sqoop
+sqoop import-all-tables \
+    --connect jdbc:mysql://quickstart:3306/billboard \
+    --username=root \
+    --password=cloudera \
+    --compression-codec=snappy \
+    --as-parquetfile \
+    --warehouse-dir=/user/hive/warehouse \
+    --hive-import
+
+
+
+
+# Examine Hive table and delete it
+
+hadoop fs -ls /user/hive/warehouse/
+hadoop fs -rm -r /user/hive/warehouse/intfloat
+
+More about the trash folder: http://www.cloudera.com/documentation/archive/manager/4-x/4-8-4/Cloudera-Manager-Managing-Clusters/cmmc_hdfs_trash.html
+
+http://www.inquidia.com/news-and-info/hadoop-file-formats-its-not-just-csv-anymore
+
+
+Location of hadoop conf files: http://stackoverflow.com/questions/21370086/where-is-the-configuration-file-for-hdfs-in-hadoop-2-2-0
+
+Changing the trash thing: 
+
+https://github.com/simplegeo/hadoop/blob/master/example-confs/conf.secure/core-site.xml
+
+
+For clients: 
+
++Do you have your Trash set up correctly?
+
++What storage file types are you using? 
+
+
